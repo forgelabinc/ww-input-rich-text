@@ -64,6 +64,7 @@ export default {
             'debounce',
             'debounceDelay',
             'autofocus',
+            'disableLatex',
             'enableMention',
             [
                 'mentionChar',
@@ -452,6 +453,15 @@ export default {
             },
             type: 'OnOff',
             defaultValue: false,
+        },
+        disableLatex: {
+            section: 'settings',
+            label: {
+                en: 'Disable LaTeX',
+            },
+            type: 'OnOff',
+            defaultValue: false,
+            bindable: true,
         },
         editable: {
             section: 'settings',

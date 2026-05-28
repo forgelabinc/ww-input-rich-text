@@ -709,6 +709,7 @@ export default {
             return {
                 placeholder: wwLib.wwLang.getText(this.content.placeholder),
                 autofocus: this.content.autofocus,
+                disableLatex: this.content.disableLatex,
                 image: {
                     inline: this.content.img?.inline,
                     allowBase64: true,
@@ -1005,19 +1006,21 @@ export default {
                                 char: this.editorConfig.mention.char,
                             },
                         }),
-                    Mathematics.configure({
-                        regex: /(?<!\$)\$([^\$]+)\$(?!\$)/gi,
-                        katexOptions: {
-                            throwOnError: false,
-                        },
-                    }),
-                    Mathematics.extend({ name: 'MathematicsDisplay' }).configure({
-                        regex: /\$\$([^\$]+)\$\$/gi,
-                        katexOptions: {
-                            throwOnError: false,
-                            displayMode: true,
-                        },
-                    }),
+                    !this.editorConfig.disableLatex &&
+                        Mathematics.configure({
+                            regex: /(?<!\$)\$([^\$]+)\$(?!\$)/gi,
+                            katexOptions: {
+                                throwOnError: false,
+                            },
+                        }),
+                    !this.editorConfig.disableLatex &&
+                        Mathematics.extend({ name: 'MathematicsDisplay' }).configure({
+                            regex: /\$\$([^\$]+)\$\$/gi,
+                            katexOptions: {
+                                throwOnError: false,
+                                displayMode: true,
+                            },
+                        }),
                 ],
                 onCreate: () => {
                     this.setValue(this.getContent());
